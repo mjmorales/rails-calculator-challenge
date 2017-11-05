@@ -7,6 +7,7 @@ gem 'rails', '~> 5.1.4'
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails'
+gem 'bootstrap', '~> 4.0.0.beta2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # See https://github.com/rails/execjs#readme for more supported runtimes
