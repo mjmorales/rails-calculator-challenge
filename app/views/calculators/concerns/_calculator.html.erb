@@ -1,7 +1,7 @@
 <div class="table-bordered calculator">
   <div class="row">
     <div class="col-md-12">
-      <%= text_field_tag(:expression, '', class: 'text-right form-control') %>
+      <%= text_field_tag(:expression, '', class: 'text-right form-control js-calculator-expression') %>
     </div>
   </div>
   <br/>
@@ -55,10 +55,10 @@
       <button class="btn btn-default btn-block js-calculator-integer-btn">1</button>
     </div>
     <div class="col-md-3">
-      <button class="btn btn-default btn-block js-calculator-inverse-btn">2</button>
+      <button class="btn btn-default btn-block js-calculator-integer-btn">2</button>
     </div>
     <div class="col-md-3">
-      <button class="btn btn-default btn-block js-calculator-division-btn">3</button>
+      <button class="btn btn-default btn-block js-calculator-integer-btn">3</button>
     </div>
     <div class="col-md-3">
       <button class="btn btn-default btn-block js-calculator-sqrt-btn">sqrt</button>
@@ -70,7 +70,7 @@
       <button class="btn btn-default btn-block js-calculator-integer-btn">0</button>
     </div>
     <div class="col-md-3">
-      <button class="btn btn-default btn-block js-calculator-inverse-btn">00</button>
+      <button class="btn btn-default btn-block js-calculator-integer-btn">00</button>
     </div>
     <div class="col-md-3">
       <button class="btn btn-default btn-block js-calculator-integer-btn">.</button>
