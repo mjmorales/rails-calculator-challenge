@@ -1,3 +1,5 @@
+var CURRENT_CURSOR_POS = 0;
+
 function modify_calc_expression(calculator, mod) {
   var currentVal = calculator.val();
   if(currentVal.length === 0) {
@@ -20,7 +22,14 @@ function calculator_clear(calculator) {
   CURRENT_CURSOR_POS = 0;
 }
 
-var CURRENT_CURSOR_POS = 0;
+function submitExpression(calculator) {
+  $.get('/calculators/calculate.json',
+        { expression: calculator.val() },
+        function(data, status){
+          calculator_clear(calculator);
+          modify_calc_expression(calculator, data);
+        });
+}
 
 $(document).ready(function() {
   var calculator = $('.js-calculator-expression');
@@ -32,8 +41,9 @@ $(document).ready(function() {
     calculator_clear(calculator);
   });
 
-  $('.js-calculator-inverse-btn').click(function(){
-    calculator_clear();
+  $('.js-calculator-exponent-btn').click(function(){
+    modify_calc_expression(calculator, '**()');
+    CURRENT_CURSOR_POS -= 1;
   });
 
   $('.js-calculator-division-btn').click(function(){
@@ -46,6 +56,7 @@ $(document).ready(function() {
 
   $('.js-calculator-sqrt-btn').click(function(){
     modify_calc_expression(calculator, 'sqrt()');
+    CURRENT_CURSOR_POS -= 1;
   });
 
   $('.js-calculator-subtraction-btn').click(function(){
@@ -59,4 +70,8 @@ $(document).ready(function() {
   $('.js-calculator-integer-btn').click(function(){
     modify_calc_expression(calculator, $(this).text());
   });
+
+  $('.js-calculator-equals-btn').click(function () {
+    submitExpression(calculator);
+  })
 });
