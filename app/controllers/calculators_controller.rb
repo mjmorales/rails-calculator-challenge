@@ -8,6 +8,9 @@ class CalculatorsController < ApplicationController
   end
 
   def calculate
+    expression = calculator_params[:expression]
+    set_cookies(expression)
+
     response = Calculator.new(calculator_params[:expression]).safe_eval
     respond_to do |format|
       format.json { render(json: calculation_response_hash(response)) }
@@ -30,4 +33,11 @@ class CalculatorsController < ApplicationController
     json_response
   end
 
+  def set_cookies(expression)
+    cookies[:trials] ||= ''
+    previous_trials = cookies[:trials].split(',')
+    previous_trials.shift if previous_trials.length > 10
+    previous_trials << expression
+    cookies[:trials] = previous_trials.join(',')
+  end
 end
