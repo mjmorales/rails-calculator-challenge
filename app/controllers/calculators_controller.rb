@@ -2,6 +2,7 @@ require 'calculator'
 
 class CalculatorsController < ApplicationController
   def index
+    @previous_trials = cookies[:trials].try(:split, ',') || []
     respond_to do |format|
       format.html
     end
@@ -36,7 +37,7 @@ class CalculatorsController < ApplicationController
   def set_cookies(expression)
     cookies[:trials] ||= ''
     previous_trials = cookies[:trials].split(',')
-    previous_trials.shift if previous_trials.length > 10
+    previous_trials.shift if previous_trials.size > 10
     previous_trials << expression
     cookies[:trials] = previous_trials.join(',')
   end

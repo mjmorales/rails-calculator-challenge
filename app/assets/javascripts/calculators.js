@@ -26,17 +26,27 @@ function submitExpression(calculator) {
   $.get('/calculators/calculate.json',
         { expression: calculator.val() },
         function(data, status){
-          alert(previous_expressions());
           calculator_clear(calculator);
           modify_calc_expression(calculator, data.success || 0);
+
           if(data.error !== undefined){
             flash_message('error', data.error);
           }
+
+          set_previous_expressions();
         });
 }
 
 function previous_expressions() {
-  return Cookies.get('trials');
+  return Cookies.get('trials').split(',');
+}
+
+function set_previous_expressions() {
+  var trials_container = $('.js-trial-container');
+  trials_container.empty();
+  previous_expressions().forEach(function (trial) {
+    trials_container.prepend('<div class="row"><div class="col-md-12 previous-trial">' + trial + '</div></div>');
+  })
 }
 
 $(document).ready(function() {
