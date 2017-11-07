@@ -27,7 +27,10 @@ function submitExpression(calculator) {
         { expression: calculator.val() },
         function(data, status){
           calculator_clear(calculator);
-          modify_calc_expression(calculator, data);
+          modify_calc_expression(calculator, data.success || 0);
+          if(data.error !== undefined){
+            flash_message('error', data.error);
+          }
         });
 }
 

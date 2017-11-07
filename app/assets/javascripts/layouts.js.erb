@@ -1,0 +1,23 @@
+function response_flash_type(msg_type){
+  if(msg_type === 'success')
+    return 'success';
+  else if(msg_type === 'error')
+    return 'danger';
+  else if(msg_type === 'warning')
+    return 'warning';
+  return 'success';
+}
+
+function flash_message_div(msg_type, response) {
+  return '<div class="js-flash-message alert alert-' + response_flash_type(msg_type) + '">' + response + "</div>";
+}
+
+function flash_message(msg_type, response) {
+  var flash_container = $(".js-flash-container")
+  flash_container.empty();
+  flash_container.append(flash_message_div(msg_type, response));
+
+  var flash = $('.js-flash-message ');
+  flash.fadeIn();
+  flash.fadeOut(8000);
+}
