@@ -1,3 +1,31 @@
+.calculator-bounding-box {
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+.calculator-container {
+  border: 2px solid #5bc0de;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .calculator {
   padding: 10px;
+}
+
+.previous-trial {
+  border: 1.5px solid lightblue;
+  border-right: hidden;
+  border-left: hidden;
+  border-top: hidden;
+}
+
+.js-trial-container {
+  overflow-y: auto;
+  height: 100px;
+  border: 2px solid #5bc0de;
+}
+
+input.js-calculator-expression {
+  border: 2px solid #5bc0de;
 }
