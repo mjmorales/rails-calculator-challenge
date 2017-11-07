@@ -91,5 +91,15 @@ $(document).ready(function() {
 
   $('.js-calculator-equals-btn').click(function () {
     submitExpression(calculator);
-  })
+  });
+
+  $('.js-clear-previous-trials').click(function () {
+    Cookies.set('trials', '');
+    set_previous_expressions();
+  });
+
+  // TODO: Add binding for enter key on expression field
+  // calculator.bind("enterKey",function(e){
+  //   submitExpression(calculator);
+  // });
 });
