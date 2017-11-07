@@ -15,7 +15,7 @@ class Calculator
   def safe_eval(debug = false)
     # Errors here should get parsed depending on users and endpoints
     # Debug variable exist for potential future logging
-    raise 'unsafe expression string' unless safe_string?(@expression)
+    raise 'unsafe expression string' unless safe_string?
     @evaluation[:success] = @calculator.evaluate(@expression)
     @evaluation
   rescue => e
@@ -27,9 +27,10 @@ class Calculator
 
   private
 
-  def safe_string?(string)
+  def safe_string?
+    @expression.gsub!('**', '^')
     # TODO: Improve Regex matcher to better follow parenth encapsulated items
-    string[/(sqrt|\+|\-|\/|\(|\)|\d|\*|(\d+\.\d+))*/] == string
+    @expression[/(sqrt|\+|\-|\/|\(|\)|\d|\*|\^|(\d+\.\d+))*/] == @expression
   end
 
   def dentaku_init
