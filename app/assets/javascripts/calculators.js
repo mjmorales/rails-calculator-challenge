@@ -26,12 +26,17 @@ function submitExpression(calculator) {
   $.get('/calculators/calculate.json',
         { expression: calculator.val() },
         function(data, status){
+          alert(previous_expressions());
           calculator_clear(calculator);
           modify_calc_expression(calculator, data.success || 0);
           if(data.error !== undefined){
             flash_message('error', data.error);
           }
         });
+}
+
+function previous_expressions() {
+  return Cookies.get('trials');
 }
 
 $(document).ready(function() {
