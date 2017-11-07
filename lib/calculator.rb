@@ -30,7 +30,7 @@ class Calculator
   def safe_string?
     @expression.gsub!('**', '^')
     # TODO: Improve Regex matcher to better follow parenth encapsulated items
-    @expression[/(sqrt|\+|\-|\/|\(|\)|\d|\*|\^|(\d+\.\d+))*/] == @expression
+    @expression[/(sqrt|\+|\-|\/|\(|\)|\d|\*|\^|\.)*/] == @expression
   end
 
   def dentaku_init
