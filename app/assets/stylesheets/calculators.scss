@@ -1,6 +1,7 @@
 .calculator-bounding-box {
   margin-left: 35%;
   margin-right: 35%;
+  background-color: lightblue;
 }
 
 .calculator-container {
@@ -24,6 +25,7 @@
   overflow-y: auto;
   height: 100px;
   border: 2px solid #5bc0de;
+  background-color: #fff;
 }
 
 input.js-calculator-expression {
