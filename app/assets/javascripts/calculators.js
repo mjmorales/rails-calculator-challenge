@@ -2,6 +2,10 @@ var CURRENT_CURSOR_POS = 0;
 
 function modify_calc_expression(calculator, mod) {
   var currentVal = calculator.val();
+  if(CURRENT_CURSOR_POS === 0) {
+    calculator.val(mod + currentVal);
+    return;
+  }
   if(currentVal.length === 0) {
     calculator.val(mod);
   } else {
@@ -14,6 +18,11 @@ function modify_calc_expression(calculator, mod) {
 }
 
 function cursor_position(calculator) {
+  var start = calculator.prop('selectionStart');
+  if(start >= calculator.val().length) {
+    return calculator.val().length;
+  }
+
   return calculator.prop('selectionStart');
 }
 
@@ -98,8 +107,25 @@ $(document).ready(function() {
     set_previous_expressions();
   });
 
-  // TODO: Add binding for enter key on expression field
-  // calculator.bind("enterKey",function(e){
-  //   submitExpression(calculator);
-  // });
+  // Handling for Key Presses on Expression field
+  $(calculator).keyup(function(e) {
+    // Enter button submits current expression
+    if(e.keyCode === 13){
+      submitExpression(calculator);
+    }
+    // Left Arrow Or Back Space moves CURSOR_POS backwards
+    else if(e.keyCode === 8 || e.keyCode === 37) {
+      CURRENT_CURSOR_POS--;
+      if(CURRENT_CURSOR_POS < 0) {
+        CURRENT_CURSOR_POS = 0;
+      }
+    }
+    // All other keys that add digits move CURSOR_FORWARD
+    else {
+      CURRENT_CURSOR_POS++;
+      if(CURRENT_CURSOR_POS >= calculator.val().length) {
+        CURRENT_CURSOR_POS = calculator.val().length;
+      }
+    }
+  });
 });
