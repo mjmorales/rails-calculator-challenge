@@ -1,17 +1,19 @@
 var CURRENT_CURSOR_POS = 0;
 
 function modify_calc_expression(calculator, mod) {
+  if(isNaN(CURRENT_CURSOR_POS))
+    CURRENT_CURSOR_POS = calculator.val().length;
   var currentVal = calculator.val();
   if(CURRENT_CURSOR_POS === 0) {
     calculator.val(mod + currentVal);
-    return;
-  }
-  if(currentVal.length === 0) {
-    calculator.val(mod);
   } else {
-    var leftString = currentVal.substr(0, CURRENT_CURSOR_POS);
-    var rightString = currentVal.substr(CURRENT_CURSOR_POS, currentVal.length - 1);
-    calculator.val(leftString + mod + rightString);
+    if(currentVal.length === 0) {
+      calculator.val(mod);
+    } else {
+      var leftString = currentVal.substr(0, CURRENT_CURSOR_POS);
+      var rightString = currentVal.substr(CURRENT_CURSOR_POS, currentVal.length - 1);
+      calculator.val(leftString + mod + rightString);
+    }
   }
 
   CURRENT_CURSOR_POS += mod.length;
@@ -28,10 +30,10 @@ function cursor_position(calculator) {
 
 function calculator_clear(calculator) {
   calculator.val('');
-  CURRENT_CURSOR_POS = 0;
 }
 
 function submitExpression(calculator) {
+  CURRENT_CURSOR_POS = 0;
   $.get('/calculators/calculate.json',
         { expression: calculator.val() },
         function(data, status){
