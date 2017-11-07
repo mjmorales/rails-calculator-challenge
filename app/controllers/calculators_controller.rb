@@ -2,7 +2,7 @@ require 'calculator'
 
 class CalculatorsController < ApplicationController
   def index
-    @previous_trials = cookies[:trials].try(:split, ',') || []
+    @previous_trials = cookies[:trials].try(:split, ',').try(:reverse) || []
     respond_to do |format|
       format.html
     end
